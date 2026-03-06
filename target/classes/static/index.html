@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeAI - Professional Resume Analyzer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container nav-content">
+            <div class="flex items-center gap-2">
+                <div class="logo-box">R</div>
+                <span style="font-weight: 700; font-size: 1.25rem;">ResumeAI</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 4rem; padding-bottom: 4rem; flex-grow: 1;">
+
+        <!-- Hero Section -->
+        <div class="text-center anim-up" style="margin-bottom: 3rem;">
+            <h1>
+                Get recruiter-style resume feedback<br><span class="gradient-text">in 30 seconds for any job</span>
+            </h1>
+            <p class="text-secondary" style="font-size: 1.125rem; max-width: 600px; margin: 0 auto 0.5rem;">
+                Students, freshers, and working professionals across IT, teaching, sales, design, operations, and more.
+            </p>
+            <p class="text-secondary flex justify-center"
+                style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 1.5rem; opacity: 0.9;">
+                <span class="badge-pill inline-flex items-center gap-1"
+                    style="background: var(--glass-bg); border-color: var(--glass-border);"><i data-lucide="sparkles"
+                        style="width: 12px; height: 12px; color: var(--primary);"></i> Powered by Gemini</span>
+            </p>
+
+            <div class="flex justify-center gap-6 text-secondary"
+                style="font-size: 0.95rem; max-width: 700px; margin: 0 auto 2.5rem; opacity: 0.85; flex-wrap: wrap; font-weight: 500;">
+                <span class="flex items-center gap-2"><i data-lucide="edit-3"
+                        style="width: 18px; height: 18px; color: var(--primary);"></i> Improve bullet points</span>
+                <span class="flex items-center gap-2"><i data-lucide="crosshair"
+                        style="width: 18px; height: 18px; color: var(--success);"></i> Match the JD</span>
+                <span class="flex items-center gap-2"><i data-lucide="file-check-2"
+                        style="width: 18px; height: 18px; color: #bc8cff;"></i> Pass ATS-style checks</span>
+            </div>
+
+            <!-- Features Chips -->
+            <div class="flex justify-center gap-4" style="flex-wrap: wrap; margin-bottom: 2rem;">
+                <span class="badge-pill"
+                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
+                    <i data-lucide="zap" style="width: 14px; height: 14px; color: var(--warning);"></i> Instant Analysis
+                </span>
+                <span class="badge-pill"
+                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
+                    <i data-lucide="target" style="width: 14px; height: 14px; color: var(--primary);"></i> Role-Specific
+                </span>
+                <span class="badge-pill"
+                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
+                    <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--success);"></i> Private
+                    & Secure
+                </span>
+            </div>
+
+            <p class="text-secondary" style="font-size: 0.85rem; max-width: 500px; margin: 0 auto;">
+                Trained on feedback from HR recruiters and technical interviewers to mimic real screening.
+            </p>
+        </div>
+
+        <!-- Step Sequence -->
+        <div class="steps-container anim-up delay-100"
+            style="max-width: 700px; margin: 0 auto 2rem; text-align: center;">
+            <div class="flex justify-between items-center text-small text-secondary" style="font-weight: 500;">
+                <span>1. Upload PDF</span>
+                <span>&rarr;</span>
+                <span>2. Add target role</span>
+                <span>&rarr;</span>
+                <span>3. Choose perspective</span>
+                <span>&rarr;</span>
+                <span>4. Get report</span>
+            </div>
+        </div>
+
+        <!-- Upload & Config Card -->
+        <div id="upload-card" class="glass-card anim-up delay-200" style="max-width: 700px; margin: 0 auto;">
+
+            <p class="text-secondary"
+                style="font-size: 0.95rem; font-weight: 500; text-align: center; margin-bottom: 1.5rem; color: var(--primary);">
+                You’ll get a fit score, top strengths, missing skills, and concrete bullet-level edit suggestions.
+            </p>
+
+            <!-- Drag & Drop Zone -->
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                    <label class="form-label" style="font-weight: 600; margin-bottom: 0;">1. Upload Resume</label>
+                    <div class="upload-actions flex gap-2">
+                        <button id="toggle-file-btn" class="btn-upload btn-upload-active">Upload file</button>
+                        <button id="toggle-paste-btn" class="btn-upload btn-upload-inactive">Paste Text</button>
+                    </div>
+                </div>
+
+                <div id="drop-zone" class="drop-zone" style="margin-top: 0.5rem;">
+                    <div class="upload-icon-wrapper">
+                        <i data-lucide="upload-cloud" style="width: 32px; height: 32px; color: var(--primary);"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary);">Drop your resume here <span
+                            class="text-secondary text-sm font-normal block mt-1">(PDF, DOCX, JPG, PNG – up to 5
+                            MB)</span></h3>
+                    <div style="margin-top: 1rem; margin-bottom: 0.5rem;">
+                        <input type="file" id="file-input" accept=".pdf,.docx,image/png,image/jpeg,image/jpg"
+                            class="upload-hidden" />
+                        <label for="file-input" class="upload-btn">
+                            Browse Files
+                        </label>
+                    </div>
+                    <p class="text-secondary" style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">If your resume
+                        is a scan
+                        or photo, we’ll use OCR to read it before analysis.<br>Very blurry or low-resolution photos may
+                        not work well.</p>
+                </div>
+
+                <div id="paste-zone" class="hidden" style="margin-top: 0.5rem;">
+                    <div class="paste-wrapper">
+                        <textarea id="paste-input" class="paste-textarea" rows="8"
+                            placeholder="Paste your resume text here..."></textarea>
+                        <button type="button" class="paste-btn-inline"
+                            onclick="navigator.clipboard.readText().then(text => document.getElementById('paste-input').value = text).catch(() => alert('Clipboard access denied'))">Paste</button>
+                    </div>
+                </div>
+
+                <p class="text-secondary text-center w-full"
+                    style="font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.8;">
+                    <i data-lucide="info"
+                        style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                    <strong>Best results:</strong> Use a simple, text-based resume (no heavy graphics, clear headings)
+                    for more ATS-like accuracy.
+                </p>
+            </div>
+
+            <!-- Configuration Form -->
+            <div style="margin-top: 2rem;">
+                <div class="form-group">
+                    <label class="form-label" style="font-weight: 600;">2. Target Job Role</label>
+                    <input type="text" id="job-role" placeholder="e.g. Java Developer, Data Analyst" class="form-input"
+                        style="margin-top: 0.5rem;">
+                    <div id="quick-chips" class="flex gap-2 mt-2 flex-wrap pb-2" style="font-size: 0.8rem;">
+                        <span class="badge-pill role-chip cursor-pointer hover:bg-slate-200 transition-colors"
+                            data-role="Java Developer"
+                            style="background: var(--glass-bg); border-color: var(--glass-border);">Java
+                            Developer</span>
+                        <span class="badge-pill role-chip cursor-pointer hover:bg-slate-200 transition-colors"
+                            data-role="Data Analyst"
+                            style="background: var(--glass-bg); border-color: var(--glass-border);">Data Analyst</span>
+                        <span class="badge-pill role-chip cursor-pointer hover:bg-slate-200 transition-colors"
+                            data-role="Primary Teacher"
+                            style="background: var(--glass-bg); border-color: var(--glass-border);">Primary
+                            Teacher</span>
+                        <span class="badge-pill role-chip cursor-pointer hover:bg-slate-200 transition-colors"
+                            data-role="Sales Executive"
+                            style="background: var(--glass-bg); border-color: var(--glass-border);">Sales
+                            Executive</span>
+                    </div>
+                </div>
+                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.5rem;">
+                    Examples: ‘Java Developer at TCS’, ‘Primary School Teacher’, ‘Sales Executive in FMCG’, ‘Graphic
+                    Designer in EdTech’. Optimized for English resumes; basic support for mixed Hinglish descriptions.
+                </p>
+                <div id="role-error" class="hidden"
+                    style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;">
+                    Please enter a target job role.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" style="font-weight: 600;">3. Paste Job Description (Optional)</label>
+                <textarea id="job-description" class="form-input"
+                    style="min-height: 100px; padding-left: 1rem; margin-top: 0.5rem;"
+                    placeholder="Paste the full job description here for a tailored analysis..."></textarea>
+                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.5rem;">
+                    We’ll compare your skills directly against these requirements. Paste from Naukri, LinkedIn, Indeed,
+                    etc. for best keyword matching.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" style="font-weight: 600;">4. Reviewer Perspective</label>
+                <div class="radio-grid" style="margin-top: 0.5rem;">
+                    <!-- HR Option -->
+                    <label class="radio-card-label">
+                        <input type="radio" name="reviewer" value="HR Recruiter" checked>
+                        <div class="radio-card-content">
+                            <i data-lucide="users"
+                                style="color: var(--primary); width: 20px; height: 20px; margin-top: 2px;"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary);">HR Recruiter</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
+                                    Focus on clarity, soft skills, formatting</div>
+                            </div>
+                        </div>
+                    </label>
+                    <!-- Tech Option -->
+                    <label class="radio-card-label">
+                        <input type="radio" name="reviewer" value="Technical Interviewer">
+                        <div class="radio-card-content">
+                            <i data-lucide="cpu"
+                                style="color: #bc8cff; width: 20px; height: 20px; margin-top: 2px;"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary);">Technical</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Focus
+                                    on stack, depth, and impact</div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.8;">
+                    Not sure? Start with <b>HR Recruiter</b> for overall review, then Technical if you’re in IT.<br>
+                    Non-IT roles (teaching, sales, design, operations) usually start with HR Recruiter.
+                </p>
+            </div>
+
+            <button id="analyze-btn" disabled class="btn btn-primary" style="margin-top: 1rem;">
+                Analyze Resume
+            </button>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" id="demo-link"
+                    style="color: var(--primary); font-size: 0.85rem; text-decoration: underline;">See example
+                    report</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" id="how-it-works"
+                    style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: underline; cursor: help;"
+                    title="We use Gemini to analyze your resume and simulate how HR/technical reviewers think.">How this
+                    works</a>
+            </div>
+
+            <p class="text-secondary" style="font-size: 0.75rem; margin-top: 1rem; text-align: center; opacity: 0.7;">
+                <i data-lucide="lock" style="width: 10px; height: 10px; display: inline-block;"></i> Resumes are
+                processed securely and not stored after analysis.
+            </p>
+        </div>
+
+        <!-- How It Works Modal -->
+        <div id="how-it-works-modal"
+            class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center pt-[100px] sm:pt-0"
+            style="backdrop-filter: blur(4px);">
+            <div class="glass-card max-w-lg w-full m-4 relative max-h-[90vh] overflow-y-auto">
+                <button id="close-modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                <h2 class="text-xl font-bold mb-4">How Antigravity AI Works</h2>
+                <div class="space-y-4 text-secondary text-sm">
+                    <p>We use Gemini (Google's latest LLM) to simulate a real recruiter or technical screener.</p>
+
+                    <ul class="list-disc pl-5 space-y-3 mt-4">
+                        <li><strong>1. OCR Text Extraction:</strong> If you upload an image (JPG/PNG) or a scanned PDF,
+                            we first run Optical Character Recognition (OCR) to read the text.</li>
+                        <li><strong>2. AI Analysis:</strong> Your resume text is combined with your Target Job &
+                            Description, and sent to the Gemini API to analyze it against strict ATS constraints.</li>
+                        <li><strong>3. Privacy:</strong> We perform the analysis in-memory. We never save or store your
+                            resume on our servers after the analysis is complete.</li>
+                        <li><strong>4. Limitations:</strong> The system works best with English (or Hinglish) text.
+                            Heavily graphic, multi-column resumes or very blurry photos may lose structure or text
+                            during extraction.</li>
+                    </ul>
+                </div>
+                <div class="mt-6 text-center">
+                    <button id="close-modal-btn" class="btn btn-secondary w-full sm:w-auto px-8">Got it</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Loading View -->
+        <div id="loading-view" class="hidden flex flex-col items-center justify-center anim-up"
+            style="padding: 4rem 0;">
+            <div class="loader" style="margin-bottom: 2rem;"></div>
+            <h3 id="loader-heading" style="color: var(--text-primary); transition: opacity 0.3s ease;">Analyzing your
+                resume...</h3>
+            <p id="loader-sub" class="text-secondary"
+                style="margin-top: 0.5rem; max-width: 400px; text-align: center; transition: opacity 0.3s ease;">
+                Checking bullets, skills, and ATS formatting...
+            </p>
+        </div>
+
+        <!-- Results View -->
+        <div id="results-view" class="hidden w-full anim-up" style="max-width: 900px; margin: 0 auto;">
+
+            <!-- Score Header -->
+            <div class="glass-card"
+                style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+                <div>
+                    <h2>Analysis Complete</h2>
+                    <p class="text-secondary">Analysis for target role: <span id="res-role"
+                            style="color: var(--primary); font-weight: 600;">Role</span></p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-center md:text-right hidden md:block">
+                        <div
+                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.25rem;">
+                            ATS Fit Score</div>
+                        <div id="score-quality" style="font-weight: 600; color: var(--warning);">Calculating...</div>
+                    </div>
+                    <div class="score-circle-container">
+                        <svg class="score-svg" viewBox="0 0 96 96">
+                            <circle cx="48" cy="48" r="40" stroke-width="8" fill="transparent"
+                                class="score-circle-bg" />
+                            <circle id="score-circle" cx="48" cy="48" r="40" stroke="#58a6ff" stroke-width="8"
+                                fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                                class="score-circle-val" />
+                        </svg>
+                        <span id="score-val" class="score-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Sub-scores (Horizontal Bars) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"
+                    style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+
+                    <div class="w-full">
+                        <div class="flex justify-between"
+                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
+                            <span>Skills Match</span>
+                            <span id="score-skills-text">0/100</span>
+                        </div>
+                        <div
+                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
+                            <div id="score-skills-bar"
+                                style="height: 100%; width: 0%; background: var(--success); transition: width 1s ease;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between"
+                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
+                            <span>Experience Relevance</span>
+                            <span id="score-experience-text">0/100</span>
+                        </div>
+                        <div
+                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
+                            <div id="score-experience-bar"
+                                style="height: 100%; width: 0%; background: var(--primary); transition: width 1s ease;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between"
+                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
+                            <span>ATS Formatting</span>
+                            <span id="score-formatting-text">0/100</span>
+                        </div>
+                        <div
+                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
+                            <div id="score-formatting-bar"
+                                style="height: 100%; width: 0%; background: #bc8cff; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between"
+                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
+                            <span>Clarity & Impact</span>
+                            <span id="score-clarity-text">0/100</span>
+                        </div>
+                        <div
+                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
+                            <div id="score-clarity-bar"
+                                style="height: 100%; width: 0%; background: var(--warning); transition: width 1s ease;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Summary Box -->
+                <div class="w-full"
+                    style="background: rgba(255,255,255,0.05); border-radius: 0.5rem; padding: 0.75rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary);">
+                    Fit score: <span id="summary-box-score"
+                        style="font-weight: 600; color: var(--text-primary);">0/100</span> |
+                    Role: <span id="summary-box-role"
+                        style="font-weight: 600; color: var(--text-primary);">Unknown</span> |
+                    Perspective: <span id="summary-box-perspective"
+                        style="font-weight: 600; color: var(--text-primary);">HR Recruiter</span>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-bottom: 2rem;">
+                <h3 class="flex items-center gap-2" style="margin-bottom: 0.5rem;">
+                    <i data-lucide="file-text" style="color: var(--primary);"></i> Executive Summary
+                </h3>
+                <p id="res-summary" class="text-secondary" style="line-height: 1.6;">
+                    Loading summary...
+                </p>
+            </div>
+
+            <div class="result-grid">
+                <!-- Top 3 Things to Fix First -->
+                <div class="glass-card result-card col-span-2 shadow-alert"
+                    style="border-left: 4px solid var(--danger);">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="alert-triangle" style="color: var(--danger);"></i> Top 3 Things to Fix First
+                    </h3>
+                    <ul id="top-fixes-list" class="list-disc" style="padding-left: 1.5rem;">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+
+                <!-- Actionable Edits -->
+                <div class="glass-card result-card col-span-2 relative">
+                    <button class="btn btn-secondary absolute top-4 right-4 text-xs"
+                        style="padding: 0.25rem 0.5rem; width: auto;" onclick="copyEdits()">
+                        <i data-lucide="copy" style="width: 14px; height: 14px; display: inline-block;"></i> Copy
+                    </button>
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem; padding-right: 4rem;">
+                        <i data-lucide="edit-3" style="color: var(--primary);"></i> Actionable Edits (Rewrite
+                        Suggestions)
+                    </h3>
+                    <div id="actionable-list" class="flex flex-col gap-2">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Strengths -->
+                <div class="glass-card result-card">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="thumbs-up" style="color: var(--success);"></i> Key Strengths
+                    </h3>
+                    <ul id="strengths-list" class="list-disc" style="padding-left: 1.5rem;">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+
+                <!-- Missing Skills -->
+                <div class="glass-card result-card">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="alert-circle" style="color: var(--danger);"></i> Missing Skills
+                    </h3>
+                    <ul id="missing-skills-list" class="flex flex-col gap-3">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+
+                <!-- Contact Info Check -->
+                <div class="glass-card result-card">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="phone-call" style="color: #bc8cff;"></i> Missing Contact Info
+                    </h3>
+                    <ul id="contact-info-list" class="flex flex-col gap-2 list-disc" style="padding-left: 1.5rem;">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+
+                <!-- Section-by-Section Feedback -->
+                <div class="glass-card result-card col-span-2">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="layers" style="color: var(--primary);"></i> Section-by-Section Feedback
+                    </h3>
+                    <div id="section-feedback-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Grammar -->
+                <div class="glass-card result-card">
+                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
+                        <i data-lucide="spell-check" style="color: #bc8cff;"></i> Grammar & Buzzword Detector
+                    </h3>
+                    <ul id="grammar-list" class="list-disc" style="padding-left: 1.5rem;">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feedback Section -->
+            <div class="glass-card anim-up delay-300" style="margin-top: 3rem; text-align: center; padding: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Was this helpful?</h3>
+                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    Help us improve Antigravity AI. What part was most useful?
+                </p>
+                <div class="flex justify-center gap-2">
+                    <input type="text" placeholder="Your feedback..." class="form-input" style="max-width: 300px;">
+                    <button class="btn btn-primary" style="width: auto;">Send</button>
+                </div>
+            </div>
+
+            <button onclick="location.reload()" class="btn btn-secondary"
+                style="width: auto; margin: 3rem auto 0; display: block;">
+                Analyze Another Resume
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2026 ResumeAI.
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
