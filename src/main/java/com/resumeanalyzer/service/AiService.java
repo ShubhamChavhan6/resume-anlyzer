@@ -195,14 +195,21 @@ public class AiService {
             }
 
             // Step 2: Select the best model based on priority
-            // Priority 1: "Flash" models (Fast & Cost-effective). Exclude "8b" variants if
-            // possible.
+            // Priority 1: "1.5-Flash" models to avoid 503 high demand errors on newest models.
             String selectedModel = availableModels.stream()
-                    .filter(name -> name.contains("gemini") && name.contains("flash") && !name.contains("8b"))
+                    .filter(name -> name.contains("gemini-1.5-flash") && !name.contains("8b"))
                     .findFirst()
                     .orElse(null);
 
-            // Priority 2: "Pro" models (Higher reasoning, slower/more expensive)
+            // Priority 2: Any "Flash" model
+            if (selectedModel == null) {
+                selectedModel = availableModels.stream()
+                        .filter(name -> name.contains("gemini") && name.contains("flash") && !name.contains("8b"))
+                        .findFirst()
+                        .orElse(null);
+            }
+
+            // Priority 3: "Pro" models (Higher reasoning, slower/more expensive)
             if (selectedModel == null) {
                 selectedModel = availableModels.stream()
                         .filter(name -> name.contains("gemini") && name.contains("pro"))
