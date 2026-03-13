@@ -1,3 +1,4 @@
+com\resumeanalyzer\config\WebConfig.class
 com\resumeanalyzer\service\PdfService.class
 com\resumeanalyzer\ResumeAnalyzerApplication.class
 com\resumeanalyzer\service\AiService.class
@@ -5,6 +6,7 @@ com\resumeanalyzer\model\AnalysisResponse$SectionFeedback.class
 com\resumeanalyzer\service\ResumeService.class
 com\resumeanalyzer\model\AnalysisRequest.class
 com\resumeanalyzer\controller\ResumeController.class
+com\resumeanalyzer\controller\SeoController.class
 com\resumeanalyzer\controller\GlobalExceptionHandler.class
 com\resumeanalyzer\service\DocxService.class
 com\resumeanalyzer\model\AnalysisResponse.class
