@@ -1,9 +1,7 @@
-# robots.txt for ResumeAI - Resume Analyzer
-# https://resume-anlyzer-0cit.onrender.com
+
 
 User-agent: *
 Allow: /
-Disallow: /api/
 
 # Sitemap location
 Sitemap: https://resume-anlyzer-0cit.onrender.com/sitemap.xml
