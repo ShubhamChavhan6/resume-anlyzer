@@ -109,3 +109,7 @@ The frontend is designed to be lightweight and fast, serving static assets direc
 7. **Gemini API** returns JSON Analysis -> **AiService** cleans & maps it
 8. **Controller** returns `AnalysisResponse` -> **Frontend**
 9. **Frontend** renders results on the UI.
+
+
+
+Author : Shubham
