@@ -146,6 +146,15 @@ jobRoleInput.addEventListener('input', () => {
     } else {
         hrRadio.checked = true;
     }
+
+    // Update active visual state for chips
+    document.querySelectorAll('.role-chip').forEach(chip => {
+        if (chip.dataset.role.toLowerCase() === roleLower) {
+            chip.classList.add('active');
+        } else {
+            chip.classList.remove('active');
+        }
+    });
 });
 
 // Quick Chips Logic

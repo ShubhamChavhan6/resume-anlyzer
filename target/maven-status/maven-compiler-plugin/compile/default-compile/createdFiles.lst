@@ -1,3 +1,5 @@
+com\resumeanalyzer\service\KeepAliveService.class
+com\resumeanalyzer\controller\HealthController.class
 com\resumeanalyzer\config\WebConfig.class
 com\resumeanalyzer\service\PdfService.class
 com\resumeanalyzer\ResumeAnalyzerApplication.class

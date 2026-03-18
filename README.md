@@ -6,103 +6,81 @@
 
 ## 📖 Overview
 
-**ResumeAI** is a powerful, full-stack application designed to help job seekers optimize their resumes. By leveraging the **Google Gemini AI API**, the application analyzes PDF resumes against specific job roles (e.g., "Java Developer", "Product Manager") and provides detailed, actionable feedback.
+**ResumeAI** is a powerful Spring Boot full-stack application designed to help job seekers optimize their resumes. By leveraging the **Google Gemini AI API**, the application analyzes PDF or Word resumes against specific job roles (e.g., "Java Developer", "Product Manager") and provides detailed, actionable feedback.
 
 The application simulates reviews from two distinct perspectives:
 *   **HR Recruiter**: Focuses on formatting, soft skills, and clarity.
 *   **Technical Interviewer**: Focuses on technical depth, accuracy, and project impact.
 
-## 🛠️ Technology Stack
+It features a stateless design where analysis happens on-the-fly for maximum privacy, and no data is stored post-analysis.
+
+## 🛠️ Technology Stack & Architecture
+
+The system follows a **Monolithic Layered Architecture**:
 
 *   **Backend**: Java 21, Spring Boot 3.4.0 (Web, Actuator)
-*   **AI Engine**: Google Gemini 1.5 Pro (via Gemini REST API)
-*   **PDF Processing**: Apache PDFBox 3.0.0
-*   **Frontend**: HTML5, Vanilla JavaScript, CSS3 (Custom Glassmorphism Design)
+*   **AI Engine**: Google Gemini 1.5 Pro/Flash (via Gemini REST API)
+*   **Document Processing**: Apache PDFBox 3.0.0 (PDFs), Apache POI (Word Docs)
+*   **Frontend**: HTML5, Vanilla JavaScript, CSS3 (Glassmorphism UI)
 *   **Build Tool**: Apache Maven 3.9.12
 
-## 📂 Project Structure
+### Data Flow
+1. **Frontend**: User drops a file (PDF/DOCX) or pastes text into the UI. `script.js` sends it via `POST /api/resume/analyze`.
+2. **Controller Layer** (`ResumeController.java`): Receives the multipart request and routes it.
+3. **Extraction Services**: `ResumeService` uses `PdfService`, `DocxService`, or `AiService` (for OCR on images) to extract the text.
+4. **AI Analysis**: `AiService` queries the Gemini API with a strict "Technical Recruiter" or "HR" persona prompt.
+5. **Response**: The AI response is mapped to the `AnalysisResponse` record and sent back to the frontend, which dynamically renders the scores and feedback.
 
-Here is a guide to the key files and directories in the project:
+## 📂 Project Structure
 
 ```text
 resume-anlyzer/
 ├── src/main/java/com/resumeanalyzer/
-│   ├── controller/
-│   │   └── ResumeController.java       # REST API endpoints for file upload & analysis
-│   ├── service/
-│   │   ├── ResumeService.java          # Orchestrates PDF parsing and AI service calls
-│   │   ├── PdfService.java             # Extracts raw text from PDF files using PDFBox
-│   │   └── AiService.java              # Communicates with Google Gemini API
-│   ├── model/
-│   │   └── AnalysisResponse.java       # Structure of the JSON response sent to frontend
-│   │   └── AnalysisRequest.java        # Request object for the analysis (file + role)
-│   ├── exception/
-│   │   └── GlobalExceptionHandler.java # Centralized error handling
-│   ├── util/
-│   │   └── PromptBuilder.java          # Generates prompt templates for the AI
-│   └── ResumeAnalyzerApplication.java  # Main entry point for the Spring Boot app
+│   ├── controller/             # REST APIs (ResumeController, SeoController, HealthController)
+│   ├── service/                # Business logic, extraction, AI interactions
+│   ├── model/                  # Request/Response data records (AnalysisResponse)
+│   └── ResumeAnalyzerApplication.java
 │
 ├── src/main/resources/
-│   ├── static/                         # Frontend Assets
-│   │   ├── index.html                  # Main user interface
-│   │   ├── style.css                   # Custom CSS styling (Dark Theme/Glassmorphism)
-│   │   └── script.js                   # Client-side logic (Drag & drop, API calls)
-│   └── application.properties          # Config (Port, File limits, App name)
+│   ├── static/                 # Frontend Assets (index.html, style.css, script.js, SEO files)
+│   └── application.properties  # Config (Port, API keys, limits)
 │
-├── ARCHITECTURE.md                     # High-level architectural diagrams and flow
-├── APP_WORKFLOWS.md                    # Detailed user and technical workflows
-├── pom.xml                             # Maven dependency configuration
-└── README.md                           # This file
+├── pom.xml                     # Maven dependencies
+└── README.md                   # Project documentation
 ```
 
-## 🚀 How to Run
+## ✨ Core Features
+
+1.  **Multi-Format Upload**: Supports PDF, DOCX, Images (via OCR), and raw text pasting.
+2.  **Job Description Comparison**: Compare skills directly against pasting targeting JDs.
+3.  **Role-Specific Analysis**: Dynamic feedback targeting the desired role.
+4.  **Actionable Edits**: Concrete "Rewrite A as B" suggestions for resume bullet points.
+5.  **Instant Scoring & Missing Skills**: Real-time visual scoring (0-100) and gap analysis.
+
+## 🚀 How to Run Locally
 
 ### Prerequisites
 *   Java Development Kit (JDK) 21 or higher.
-*   Maven (Wrapper is included, or use installed version).
-*   **Google Gemini API Key**: You need a valid API key from Google AI Studio.
+*   A **Google Gemini API Key** from Google AI Studio.
 
 ### Steps
-
-1.  **Set Environment Environment**:
-    You must set your Gemini API key as an environment variable for security.
-    ```powershell
-    # Windows PowerShell
-    $env:GEMINI_API_KEY = "your_actual_api_key_here"
+1.  **Configure API Key**:
+    Open `src/main/resources/application.properties` and add your key:
+    ```properties
+    GEMINI_API_KEY=your_actual_api_key_here
     ```
+    *Alternatively, set it as an environment variable (`$env:GEMINI_API_KEY="..."`).*
 
 2.  **Run the Application**:
-    Navigate to the project root and run:
+    Navigate to the project root and start the server using Maven:
     ```powershell
     ./mvnw spring-boot:run
-    # OR if you have maven installed globally
-    mvn spring-boot:run
     ```
 
 3.  **Access the UI**:
-    Open your browser and go to:
-    **[http://localhost:8080](http://localhost:8080)**
+    Open your browser and navigate to: **[http://localhost:8080](http://localhost:8080)**
 
-## ✨ Features
-
-1.  **Drag & Drop Interface**: Easy file upload for PDF resumes.
-2.  **Job Description Comparison**: Paste the full JD to compare your skills directly against specific constraints.
-3.  **Role-Specific Analysis**: Tailors feedback specifically to the target job title.
-4.  **Dual Perspectives**: Choose between HR or Technical feedback styles.
-5.  **Smart Gap Analysis**: Detects critical missing skills based on the comparison.
-6.  **Instant Scoring**: Visual score indicator (0-100) based on relevance.
-7.  **Detailed Breakdown**:
-    *   **Actionable Edits**: Concrete "Rewrite X as Y" suggestions.
-    *   **Missing Skills**: Identifies critical keywords missing from the resume.
-    *   **Grammar & Formatting**: Checks for unprofessional errors.
-    *   **Strategic Suggestions**: High-level advice to improve impact.
-
-## 📝 Configuration
-
-You can configure application settings in `src/main/resources/application.properties`:
-
-*   `server.port`: Change the running port (default: 8080).
-*   `spring.servlet.multipart.max-file-size`: Adjust max upload size (default: 5MB).
-
----
-*Built for Resume Analyzer*
+## 🛠 Troubleshooting
+*   **"Resume content is too short"**: Ensure the PDF is text-based. If it's an image, the OCR service will try to parse it, but low-res images may fail.
+*   **"Ambiguous handler methods / Port already in use"**: Make sure you have terminated any running instances before starting `spring-boot:run`.
+*   **"Service Unavailable / Quota Exceeded"**: Ensure your Google API Key is valid and hasn't hit free-tier rate limits.

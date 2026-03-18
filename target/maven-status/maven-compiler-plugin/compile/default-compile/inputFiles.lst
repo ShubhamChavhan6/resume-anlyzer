@@ -1,5 +1,6 @@
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\config\WebConfig.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\controller\GlobalExceptionHandler.java
+C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\controller\HealthController.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\controller\ResumeController.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\controller\SeoController.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\model\AnalysisRequest.java
@@ -7,5 +8,6 @@ C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resum
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\ResumeAnalyzerApplication.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\service\AiService.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\service\DocxService.java
+C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\service\KeepAliveService.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\service\PdfService.java
 C:\Users\shubh\Documents\project using ai\resume-anlyzer\src\main\java\com\resumeanalyzer\service\ResumeService.java
