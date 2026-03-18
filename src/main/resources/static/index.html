@@ -1,665 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="dYTp1Z2cR0sz9qfx3_d56_BbBV0e0byjw8B5BIZkbtY" />
-
-    <!-- Primary SEO Meta Tags -->
-    <title>ResumeAI – Free AI Resume Analyzer | ATS Score Checker & Resume Review</title>
-    <meta name="description" content="Get instant AI-powered resume feedback in 30 seconds. Check your ATS score, fix weak bullet points, match job descriptions, and get recruiter-style suggestions. Free for students, freshers & professionals.">
-    <meta name="keywords" content="resume analyzer, ATS score checker, resume review, AI resume feedback, resume scanner, ATS resume checker, job application tool, resume optimization, resume builder tips, career tool, Gemini AI resume">
-    <meta name="author" content="ResumeAI">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <link rel="canonical" href="https://resume-anlyzer-0cit.onrender.com/">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#6366f1">
-    <meta name="color-scheme" content="dark">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://resume-anlyzer-0cit.onrender.com/">
-    <meta property="og:title" content="ResumeAI – Free AI Resume Analyzer & ATS Score Checker">
-    <meta property="og:description" content="Upload your resume and get recruiter-style feedback in 30 seconds. AI-powered ATS scoring, skill gap analysis, and actionable edit suggestions — 100% free.">
-    <meta property="og:site_name" content="ResumeAI">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ResumeAI – Free AI Resume Analyzer & ATS Score Checker">
-    <meta name="twitter:description" content="Get instant AI-powered resume feedback. Check ATS score, fix bullet points, match job descriptions. Free for students, freshers & professionals.">
-
-    <!-- Favicon (inline SVG) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='72' font-size='60' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'>R</text></svg>" type="image/svg+xml">
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "ResumeAI",
-        "url": "https://resume-anlyzer-0cit.onrender.com/",
-        "description": "Free AI-powered resume analyzer that checks ATS compatibility, identifies missing skills, and provides recruiter-style feedback with actionable edit suggestions in 30 seconds.",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "featureList": [
-            "ATS Score Checking",
-            "AI-Powered Resume Analysis",
-            "Job Description Matching",
-            "Bullet Point Rewrite Suggestions",
-            "Missing Skills Detection",
-            "Grammar & Buzzword Detection",
-            "Section-by-Section Feedback",
-            "HR Recruiter & Technical Review Perspectives"
-        ],
-        "creator": {
-            "@type": "Organization",
-            "name": "ResumeAI"
-        }
-    }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css">
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ResumeAI – Free AI Resume Analyzer & ATS Score Checker</title>
+<meta name="description" content="Free AI-powered resume analysis. Get ATS score, skill gap detection, bullet rewrites and recruiter-style feedback in 30 seconds. Powered by Gemini."/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
+<div class="wrap">
 
-    <!-- No JavaScript Fallback -->
-    <noscript>
-        <div style="text-align:center; padding:2rem; background:#1e1b4b; color:#e0e7ff; font-family:sans-serif;">
-            <h2>ResumeAI – AI Resume Analyzer</h2>
-            <p>This application requires JavaScript to analyze your resume. Please enable JavaScript in your browser to use ResumeAI.</p>
-            <p>ResumeAI provides free AI-powered resume analysis including ATS score checking, skill gap detection, bullet point rewrite suggestions, and recruiter-style feedback for students, freshers, and working professionals.</p>
-        </div>
-    </noscript>
+<!-- ── Navbar ── -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-mark">R</div>
+    <span class="logo-text">ResumeAI</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-badge"><span class="live-dot"></span>Free · Gemini</div>
+  </div>
+</nav>
 
-    <!-- Background Effects -->
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-eyebrow">AI-powered resume analysis</div>
+  <h1>Get <span class="h1-accent">recruiter-ready</span><br>in 30 seconds.</h1>
+  <p class="hero-sub">ATS score, skill gap detection, bullet rewrites &amp; section-by-section feedback — powered by Google Gemini.</p>
+  <div class="feature-strip">
+    <div class="feat-pill"><span class="dot"></span>ATS Score</div>
+    <div class="feat-pill"><span class="dot"></span>Skill Gap Detection</div>
+    <div class="feat-pill"><span class="dot"></span>Bullet Rewrites</div>
+    <div class="feat-pill"><span class="dot"></span>JD Matching</div>
+    <div class="feat-pill"><span class="dot"></span>Grammar Check</div>
+  </div>
+</section>
+
+<!-- ── Form ── -->
+<div class="main" id="form-section">
+
+  <!-- Progress stepper -->
+  <div class="stepper" id="stepper">
+    <div class="st-step">
+      <div class="st-num active" id="s1">1</div>
+      <span class="st-label active">Upload</span>
+    </div>
+    <div class="st-line"></div>
+    <div class="st-step">
+      <div class="st-num" id="s2">2</div>
+      <span class="st-label" id="sl2">Role</span>
+    </div>
+    <div class="st-line"></div>
+    <div class="st-step">
+      <div class="st-num" id="s3">3</div>
+      <span class="st-label" id="sl3">Perspective</span>
+    </div>
+    <div class="st-line"></div>
+    <div class="st-step">
+      <div class="st-num" id="s4">4</div>
+      <span class="st-label" id="sl4">Report</span>
+    </div>
+  </div>
+
+  <!-- Step 1: Upload -->
+  <div class="card focused" id="card-upload">
+    <div class="card-header">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+      </div>
+      <span class="card-title">Upload your resume</span>
     </div>
 
-    <!-- Navbar -->
-    <nav>
-        <div class="container nav-content">
-            <div class="flex items-center gap-2">
-                <div class="logo-box">R</div>
-                <span style="font-weight: 700; font-size: 1.25rem;">ResumeAI</span>
-            </div>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab(this,'file')">Upload file</button>
+      <button class="tab-btn" onclick="switchTab(this,'paste')">Paste text</button>
+    </div>
+
+    <!-- File tab -->
+    <div id="tab-file">
+      <div class="upload-zone" id="drop-zone"
+           onclick="document.getElementById('fileInput').click()"
+           ondragover="dragOver(event)"
+           ondragleave="dragLeave(event)"
+           ondrop="handleDrop(event)">
+        <div class="upload-icon-wrap">
+          <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
         </div>
-    </nav>
+        <div class="upload-title">Drop your resume here</div>
+        <div class="upload-sub">PDF · DOCX · JPG · PNG &nbsp;·&nbsp; up to 5 MB</div>
+        <button class="browse-btn" onclick="event.stopPropagation();document.getElementById('fileInput').click()">Browse files</button>
+        <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.jpg,.jpeg,.png" style="display:none" onchange="onFilePick(this)"/>
+      </div>
+      <div class="file-chosen" id="file-chosen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="file-name-text"></span>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:9px;line-height:1.6;">Scanned or photo resumes? OCR will extract the text automatically. Very blurry images may not work well.</p>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 4rem; padding-bottom: 4rem; flex-grow: 1;">
+    <!-- Paste tab -->
+    <div id="tab-paste" style="display:none">
+      <textarea id="paste-input" rows="8" placeholder="Paste your resume text here… Plain text works best for ATS accuracy."></textarea>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;">Tip: Use a simple, text-based resume without heavy graphics for best results.</p>
+    </div>
+  </div>
 
-        <!-- Hero Section -->
-        <div class="text-center anim-up" style="margin-bottom: 3rem;">
-            <h1>
-                Get recruiter-style feedback<br><span class="gradient-text">in 30 seconds for any job role</span>
-            </h1>
-            <p class="text-secondary flex justify-center"
-                style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 1.5rem; opacity: 0.9;">
-                <span class="badge-pill inline-flex items-center gap-1"
-                    style="background: var(--glass-bg); border-color: var(--glass-border);"><i data-lucide="sparkles"
-                        style="width: 12px; height: 12px; color: var(--primary);"></i> Powered by Gemini</span>
-            </p>
+  <!-- Step 2: Target Role -->
+  <div class="card" id="card-role">
+    <div class="card-header">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <span class="card-title">Target job role</span>
+    </div>
+    <input type="text" id="role-input" placeholder="e.g. Java Developer at TCS, Data Analyst, Primary Teacher…"
+           oninput="onRoleType()" onfocus="document.getElementById('card-role').classList.add('focused')" onblur="document.getElementById('card-role').classList.remove('focused')"/>
+    <div class="chips" id="role-chips">
+      <button class="chip" onclick="setRole('Java Developer')">Java Developer</button>
+      <button class="chip" onclick="setRole('Data Analyst')">Data Analyst</button>
+      <button class="chip" onclick="setRole('Primary Teacher')">Primary Teacher</button>
+      <button class="chip" onclick="setRole('Sales Executive')">Sales Executive</button>
+      <button class="chip" onclick="setRole('Graphic Designer')">Graphic Designer</button>
+      <button class="chip" onclick="setRole('DevOps Engineer')">DevOps Engineer</button>
+      <button class="chip" onclick="setRole('Marketing Manager')">Marketing Manager</button>
+      <button class="chip" onclick="setRole('Business Analyst')">Business Analyst</button>
+    </div>
+  </div>
 
-            <!-- Features Chips -->
-            <div class="flex justify-center gap-4" style="flex-wrap: wrap; margin-bottom: 2rem;">
-                <span class="badge-pill"
-                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
-                    <i data-lucide="zap" style="width: 14px; height: 14px; color: var(--warning);"></i> Instant Analysis
-                </span>
-                <span class="badge-pill"
-                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
-                    <i data-lucide="target" style="width: 14px; height: 14px; color: var(--primary);"></i> Role-Specific
-                </span>
-                <span class="badge-pill"
-                    style="color: var(--text-primary); border-color: var(--glass-border); background: var(--glass-bg);">
-                    <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--success);"></i> Private
-                    & Secure
-                </span>
-            </div>
+  <!-- Step 3: Job Description (optional) -->
+  <div class="card" id="card-jd">
+    <div class="card-header">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <span class="card-title">Paste job description</span>
+      <span class="optional-tag">optional</span>
+    </div>
+    <textarea id="jd-input" rows="4" placeholder="Paste the JD from Naukri, LinkedIn, Indeed… for deeper keyword matching against real requirements."
+              onfocus="document.getElementById('card-jd').classList.add('focused')" onblur="document.getElementById('card-jd').classList.remove('focused')"></textarea>
+  </div>
+
+  <!-- Step 4: Perspective -->
+  <div class="card" id="card-persp">
+    <div class="card-header">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <span class="card-title">Reviewer perspective</span>
+    </div>
+    <div class="persp-grid">
+      <div class="persp-card selected" id="persp-hr" onclick="selectPersp('hr')">
+        <div class="persp-tag">General</div>
+        <div class="persp-name">HR Recruiter</div>
+        <div class="persp-desc">Clarity, soft skills &amp; formatting. Best for all roles including non-IT.</div>
+        <div class="persp-check">✓</div>
+      </div>
+      <div class="persp-card" id="persp-tech" onclick="selectPersp('tech')">
+        <div class="persp-tag">IT / Engineering</div>
+        <div class="persp-name">Technical</div>
+        <div class="persp-desc">Stack depth, project impact &amp; architecture. Best for IT roles.</div>
+        <div class="persp-check">✓</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6;">Not sure? Start with <strong style="color:var(--text);font-weight:600">HR Recruiter</strong> for a general review. Switch to Technical for IT, data, or engineering roles.</p>
+  </div>
+
+  <!-- Analyze button -->
+  <button class="cta-btn" onclick="analyze()">
+    <div class="cta-inner">
+      Analyze my resume
+      <span class="cta-arrow">→</span>
+    </div>
+  </button>
+
+  <div class="privacy-note">
+    <span class="privacy-dot"></span>
+    Not stored after analysis &nbsp;·&nbsp; Processed securely &nbsp;·&nbsp; In-memory only
+  </div>
+
+  <!-- Links -->
+  <div style="display:flex;gap:20px;justify-content:center;margin-top:16px;">
+    <a href="#" id="demo-link" style="font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)">See example report</a>
+    <a href="#how" style="font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)">How this works</a>
+  </div>
+</div>
+
+<!-- ── Loading state ── -->
+<div class="main" id="loading-section" style="display:none">
+  <div style="text-align:center;padding:60px 0">
+    <div class="spinner"></div>
+    <div id="loading-heading" class="loading-text">Analyzing your resume…</div>
+    <div id="loading-sub" class="loading-sub">Checking bullets, skills &amp; ATS formatting</div>
+  </div>
+</div>
+
+<!-- ── Results ── -->
+<div class="main" id="results-section" style="display:none">
+
+  <div class="results-header">
+    <div>
+      <div class="results-title">Analysis complete</div>
+      <div class="results-meta" id="results-meta">Role: — · Perspective: HR Recruiter</div>
+    </div>
+  </div>
+
+  <!-- Score card -->
+  <div class="score-card">
+    <div class="score-layout">
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="7"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="var(--blue)" stroke-width="7"
+                  stroke-dasharray="226" stroke-dashoffset="226"
+                  stroke-linecap="round" transform="rotate(-90 45 45)" id="score-ring"/>
+          <text x="45" y="51" text-anchor="middle" font-size="20" font-weight="700"
+                fill="var(--text)" font-family="var(--font)" id="score-num">0</text>
+        </svg>
+        <div class="score-label" id="score-label">ATS Fit Score</div>
+      </div>
+      <div class="sub-scores">
+        <div class="sub-row">
+          <span class="sub-name">Skills match</span>
+          <div class="bar-track"><div class="bar-fill bar-green" id="bar1" style="width:0%"></div></div>
+          <span class="sub-val" id="val1">0</span>
         </div>
-
-        <!-- Step Sequence -->
-        <div class="steps-wrapper anim-up delay-100" style="max-width: 600px; margin: 0 auto 3rem;">
-            <div class="step-indicator" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                <div style="position: absolute; left: 0; top: 16px; width: 100%; height: 2px; background: rgba(255,255,255,0.1); z-index: 0;"></div>
-                <div class="step-node active" style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                    <div class="step-circle" style="width: 34px; height: 34px; border-radius: 50%; background: var(--bg-color); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 700; font-size: 0.9rem; box-shadow: 0 0 15px rgba(88,166,255,0.4);">1</div>
-                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--primary);">Upload</span>
-                </div>
-                <div class="step-node" style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                    <div class="step-circle" style="width: 34px; height: 34px; border-radius: 50%; background: var(--bg-color); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-weight: 700; font-size: 0.9rem;">2</div>
-                    <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);">Target Role</span>
-                </div>
-                <div class="step-node" style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                    <div class="step-circle" style="width: 34px; height: 34px; border-radius: 50%; background: var(--bg-color); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-weight: 700; font-size: 0.9rem;">3</div>
-                    <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);">Perspective</span>
-                </div>
-                <div class="step-node" style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                    <div class="step-circle" style="width: 34px; height: 34px; border-radius: 50%; background: var(--bg-color); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-weight: 700; font-size: 0.9rem;">4</div>
-                    <span style="font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);">Get Report</span>
-                </div>
-            </div>
+        <div class="sub-row">
+          <span class="sub-name">Experience</span>
+          <div class="bar-track"><div class="bar-fill bar-amber" id="bar2" style="width:0%"></div></div>
+          <span class="sub-val" id="val2">0</span>
         </div>
-
-        <!-- Upload & Config Card -->
-        <div id="upload-card" class="glass-card anim-up delay-200" style="max-width: 700px; margin: 0 auto;">
-
-            <p class="text-secondary"
-                style="font-size: 0.95rem; font-weight: 500; text-align: center; margin-bottom: 1.5rem; color: var(--primary);">
-                You’ll get a fit score, top strengths, missing skills, and concrete bullet-level edit suggestions.
-            </p>
-
-            <!-- Drag & Drop Zone -->
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
-                    <label class="form-label" style="font-weight: 600; margin-bottom: 0;">1. Upload Resume</label>
-                    <div class="upload-actions flex gap-2">
-                        <button id="toggle-file-btn" class="btn-upload btn-upload-active">Upload file</button>
-                        <button id="toggle-paste-btn" class="btn-upload btn-upload-inactive">Paste Text</button>
-                    </div>
-                </div>
-
-                <div id="drop-zone" class="drop-zone" style="margin-top: 0.5rem;">
-                    <div class="upload-icon-wrapper">
-                        <i data-lucide="upload-cloud" style="width: 32px; height: 32px; color: var(--primary);"></i>
-                    </div>
-                    <h3 style="color: var(--text-primary);">Drop your resume here <span
-                            class="text-secondary text-sm font-normal block mt-1">(PDF, DOCX, JPG, PNG – up to 5
-                            MB)</span></h3>
-                    <div style="margin-top: 1rem; margin-bottom: 0.5rem;">
-                        <input type="file" id="file-input" accept=".pdf,.docx,image/png,image/jpeg,image/jpg"
-                            class="upload-hidden" />
-                        <label for="file-input" class="upload-btn">
-                            Browse Files
-                        </label>
-                    </div>
-                    <p class="text-secondary" style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.8;">If your resume
-                        is a scan
-                        or photo, we’ll use OCR to read it before analysis.<br>Very blurry or low-resolution photos may
-                        not work well.</p>
-                </div>
-
-                <div id="paste-zone" class="hidden" style="margin-top: 0.5rem;">
-                    <div class="paste-wrapper">
-                        <textarea id="paste-input" class="paste-textarea" rows="8"
-                            placeholder="Paste your resume text here..."></textarea>
-                        <button type="button" class="paste-btn-inline"
-                            onclick="navigator.clipboard.readText().then(text => document.getElementById('paste-input').value = text).catch(() => alert('Clipboard access denied'))">Paste</button>
-                    </div>
-                </div>
-
-                <p class="text-secondary text-center w-full"
-                    style="font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.8;">
-                    <i data-lucide="info"
-                        style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
-                    <strong>Best results:</strong> Use a simple, text-based resume (no heavy graphics, clear headings)
-                    for more ATS-like accuracy.
-                </p>
-            </div>
-
-            <!-- Configuration Form -->
-            <div style="margin-top: 2rem;">
-                <div class="form-group">
-                    <label class="form-label" style="font-weight: 600;">2. Target Job Role</label>
-                    <input type="text" id="job-role" placeholder="e.g. Java Developer, Data Analyst" class="form-input"
-                        style="margin-top: 0.5rem;">
-                    <div id="quick-chips" class="flex gap-2 mt-2 flex-wrap pb-2" style="font-size: 0.8rem;">
-                        <span class="badge-pill role-chip" data-role="Java Developer">Java Developer</span>
-                        <span class="badge-pill role-chip" data-role="Data Analyst">Data Analyst</span>
-                        <span class="badge-pill role-chip" data-role="Primary Teacher">Primary Teacher</span>
-                        <span class="badge-pill role-chip" data-role="Sales Executive">Sales Executive</span>
-                    </div>
-                </div>
-                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.5rem;">
-                    Examples: ‘Java Developer at TCS’, ‘Primary School Teacher’, ‘Sales Executive in FMCG’, ‘Graphic
-                    Designer in EdTech’. Optimized for English resumes; basic support for mixed Hinglish descriptions.
-                </p>
-                <div id="role-error" class="hidden"
-                    style="color: var(--danger); font-size: 0.8rem; margin-top: 0.25rem;">
-                    Please enter a target job role.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" style="font-weight: 600;">3. Paste Job Description (Optional)</label>
-                <textarea id="job-description" class="form-input"
-                    style="min-height: 100px; padding-left: 1rem; margin-top: 0.5rem;"
-                    placeholder="Paste the full job description here for a tailored analysis..."></textarea>
-                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.5rem;">
-                    We’ll compare your skills directly against these requirements. Paste from Naukri, LinkedIn, Indeed,
-                    etc. for best keyword matching.
-                </p>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" style="font-weight: 600;">4. Reviewer Perspective</label>
-                <div class="radio-grid" style="margin-top: 0.5rem;">
-                    <!-- HR Option -->
-                    <label class="radio-card-label">
-                        <input type="radio" name="reviewer" value="HR Recruiter" checked>
-                        <div class="radio-card-content">
-                            <i data-lucide="users"
-                                style="color: var(--primary); width: 20px; height: 20px; margin-top: 2px;"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">HR Recruiter</div>
-                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
-                                    Focus on clarity, soft skills, formatting</div>
-                            </div>
-                        </div>
-                    </label>
-                    <!-- Tech Option -->
-                    <label class="radio-card-label">
-                        <input type="radio" name="reviewer" value="Technical Interviewer">
-                        <div class="radio-card-content">
-                            <i data-lucide="cpu"
-                                style="color: #bc8cff; width: 20px; height: 20px; margin-top: 2px;"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">Technical</div>
-                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Focus
-                                    on stack, depth, and impact</div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <p class="text-secondary" style="font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.8;">
-                    Not sure? Start with <b>HR Recruiter</b> for overall review, then Technical if you’re in IT.<br>
-                    Non-IT roles (teaching, sales, design, operations) usually start with HR Recruiter.
-                </p>
-            </div>
-
-            <button id="analyze-btn" disabled class="btn btn-primary btn-dominant" style="margin-top: 1rem; padding: 1.25rem; font-size: 1.1rem; letter-spacing: 0.5px;">
-                Analyze Resume
-            </button>
-
-            <div style="text-align: center; margin-top: 1rem;">
-                <a href="#" id="demo-link"
-                    style="color: var(--primary); font-size: 0.85rem; text-decoration: underline;">See example
-                    report</a>
-            </div>
-
-            <div style="text-align: center; margin-top: 1rem;">
-                <a href="#" id="how-it-works"
-                    style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: underline; cursor: help;"
-                    title="We use Gemini to analyze your resume and simulate how HR/technical reviewers think.">How this
-                    works</a>
-            </div>
-
-            <p class="text-secondary" style="font-size: 0.75rem; margin-top: 1rem; text-align: center; opacity: 0.7;">
-                <i data-lucide="lock" style="width: 10px; height: 10px; display: inline-block;"></i> Resumes are
-                processed securely and not stored after analysis.
-            </p>
+        <div class="sub-row">
+          <span class="sub-name">ATS formatting</span>
+          <div class="bar-track"><div class="bar-fill bar-green" id="bar3" style="width:0%"></div></div>
+          <span class="sub-val" id="val3">0</span>
         </div>
-
-        <!-- How It Works Modal -->
-        <div id="how-it-works-modal"
-            class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center pt-[100px] sm:pt-0"
-            style="backdrop-filter: blur(4px);">
-            <div class="glass-card max-w-lg w-full m-4 relative max-h-[90vh] overflow-y-auto">
-                <button id="close-modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800">
-                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
-                </button>
-                <h2 class="text-xl font-bold mb-4">How Resume Analyzer AI Works</h2>
-                <div class="space-y-4 text-secondary text-sm">
-                    <p>We use Gemini (Google's latest LLM) to simulate a real recruiter or technical screener.</p>
-
-                    <ul class="list-disc pl-5 space-y-3 mt-4">
-                        <li><strong>1. OCR Text Extraction:</strong> If you upload an image (JPG/PNG) or a scanned PDF,
-                            we first run Optical Character Recognition (OCR) to read the text.</li>
-                        <li><strong>2. AI Analysis:</strong> Your resume text is combined with your Target Job &
-                            Description, and sent to the Gemini API to analyze it against strict ATS constraints.</li>
-                        <li><strong>3. Privacy:</strong> We perform the analysis in-memory. We never save or store your
-                            resume on our servers after the analysis is complete.</li>
-                        <li><strong>4. Limitations:</strong> The system works best with English (or Hinglish) text.
-                            Heavily graphic, multi-column resumes or very blurry photos may lose structure or text
-                            during extraction.</li>
-                    </ul>
-                </div>
-                <div class="mt-6 text-center">
-                    <button id="close-modal-btn" class="btn btn-secondary w-full sm:w-auto px-8">Got it</button>
-                </div>
-            </div>
+        <div class="sub-row">
+          <span class="sub-name">Clarity &amp; impact</span>
+          <div class="bar-track"><div class="bar-fill bar-red" id="bar4" style="width:0%"></div></div>
+          <span class="sub-val" id="val4">0</span>
         </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Executive Summary -->
+  <div class="result-section">
+    <div class="rs-title">Executive Summary</div>
+    <div class="rs-content" id="exec-summary">Your summary will appear here after analysis.</div>
+  </div>
 
-        <!-- Loading View -->
-        <div id="loading-view" class="hidden flex flex-col items-center justify-center anim-up"
-            style="padding: 4rem 0;">
-            <div class="loader" style="margin-bottom: 2rem;"></div>
-            <h3 id="loader-heading" style="color: var(--text-primary); transition: opacity 0.3s ease;">Analyzing your
-                resume...</h3>
-            <p id="loader-sub" class="text-secondary"
-                style="margin-top: 0.5rem; max-width: 400px; text-align: center; transition: opacity 0.3s ease;">
-                Checking bullets, skills, and ATS formatting...
-            </p>
-        </div>
+  <!-- Top 3 Fixes -->
+  <div class="result-section" style="border-left: 3px solid var(--red);">
+    <div class="rs-title">
+      Top 3 things to fix first
+      <button class="copy-btn" onclick="copySection('fixes-content')">Copy</button>
+    </div>
+    <div id="fixes-content">
+      <div class="fix-item"><div class="fix-num">1</div><div class="fix-text">Fix item 1 will appear here.</div></div>
+    </div>
+  </div>
 
-        <!-- Results View -->
-        <div id="results-view" class="hidden w-full anim-up" style="max-width: 900px; margin: 0 auto;">
+  <!-- Key Strengths -->
+  <div class="result-section">
+    <div class="rs-title">Key strengths</div>
+    <div class="tag-list" id="strengths-list">
+      <span class="tag tag-green">Communication</span>
+    </div>
+  </div>
 
-            <!-- Score Header -->
-            <div class="glass-card"
-                style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
-                <div>
-                    <h2>Analysis Complete</h2>
-                    <p class="text-secondary">Analysis for target role: <span id="res-role"
-                            style="color: var(--primary); font-weight: 600;">Role</span></p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="text-center md:text-right hidden md:block">
-                        <div
-                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.25rem;">
-                            ATS Fit Score</div>
-                        <div id="score-quality" style="font-weight: 600; color: var(--warning);">Calculating...</div>
-                    </div>
-                    <div class="score-circle-container">
-                        <svg class="score-svg" viewBox="0 0 96 96">
-                            <circle cx="48" cy="48" r="40" stroke-width="8" fill="transparent"
-                                class="score-circle-bg" />
-                            <circle id="score-circle" cx="48" cy="48" r="40" stroke="#58a6ff" stroke-width="8"
-                                fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="251.2"
-                                class="score-circle-val" />
-                        </svg>
-                        <span id="score-val" class="score-value">0</span>
-                    </div>
-                </div>
+  <!-- Missing Skills -->
+  <div class="result-section">
+    <div class="rs-title">Missing skills</div>
+    <div class="tag-list" id="missing-list">
+      <span class="tag tag-red">Docker</span>
+    </div>
+  </div>
 
-                <!-- Sub-scores (Horizontal Bars) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"
-                    style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+  <!-- Actionable Edits -->
+  <div class="result-section">
+    <div class="rs-title">
+      Actionable edits
+      <button class="copy-btn" onclick="copySection('edits-content')">Copy</button>
+    </div>
+    <div class="rs-content" id="edits-content">Rewrite suggestions will appear here.</div>
+  </div>
 
-                    <div class="w-full">
-                        <div class="flex justify-between"
-                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
-                            <span>Skills Match</span>
-                            <span id="score-skills-text">0/100</span>
-                        </div>
-                        <div
-                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
-                            <div id="score-skills-bar"
-                                style="height: 100%; width: 0%; background: var(--success); transition: width 1s ease;">
-                            </div>
-                        </div>
-                    </div>
+  <!-- Section Feedback -->
+  <div class="result-section">
+    <div class="rs-title">Section-by-section feedback</div>
+    <div class="rs-content" id="section-feedback">Detailed feedback per section will appear here.</div>
+  </div>
 
-                    <div class="w-full">
-                        <div class="flex justify-between"
-                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
-                            <span>Experience Relevance</span>
-                            <span id="score-experience-text">0/100</span>
-                        </div>
-                        <div
-                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
-                            <div id="score-experience-bar"
-                                style="height: 100%; width: 0%; background: var(--primary); transition: width 1s ease;">
-                            </div>
-                        </div>
-                    </div>
+  <!-- Grammar & Buzzwords -->
+  <div class="result-section">
+    <div class="rs-title">Grammar &amp; buzzword detector</div>
+    <div class="rs-content" id="grammar-content">Grammar analysis will appear here.</div>
+  </div>
 
-                    <div class="w-full">
-                        <div class="flex justify-between"
-                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
-                            <span>ATS Formatting</span>
-                            <span id="score-formatting-text">0/100</span>
-                        </div>
-                        <div
-                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
-                            <div id="score-formatting-bar"
-                                style="height: 100%; width: 0%; background: #bc8cff; transition: width 1s ease;"></div>
-                        </div>
-                    </div>
+  <!-- Missing Contact -->
+  <div class="result-section">
+    <div class="rs-title">Missing contact info</div>
+    <div class="tag-list" id="contact-list">
+      <span class="tag tag-blue">LinkedIn URL</span>
+    </div>
+  </div>
 
-                    <div class="w-full">
-                        <div class="flex justify-between"
-                            style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">
-                            <span>Clarity & Impact</span>
-                            <span id="score-clarity-text">0/100</span>
-                        </div>
-                        <div
-                            style="background: var(--glass-border); height: 8px; border-radius: 4px; margin-top: 4px; overflow: hidden;">
-                            <div id="score-clarity-bar"
-                                style="height: 100%; width: 0%; background: var(--warning); transition: width 1s ease;">
-                            </div>
-                        </div>
-                    </div>
+  <!-- Feedback widget -->
+  <form id="feedbackForm" class="feedback-section" onsubmit="submitFeedback(event)">
+    <div class="feedback-title">Was this helpful?</div>
+    <div class="feedback-sub">Help us improve ResumeAI — takes 10 seconds.</div>
+    <div class="stars-row" id="stars">
+      <span class="star" onclick="rate(1)">★</span>
+      <span class="star" onclick="rate(2)">★</span>
+      <span class="star" onclick="rate(3)">★</span>
+      <span class="star" onclick="rate(4)">★</span>
+      <span class="star" onclick="rate(5)">★</span>
+      <input type="hidden" id="ratingInput" name="rating" value="0"/>
+    </div>
+    <div class="form-row">
+      <div>
+        <div class="field-label">Name (optional)</div>
+        <input type="text" id="fbName" name="name" placeholder="Your name"/>
+      </div>
+      <div>
+        <div class="field-label">Message (optional)</div>
+        <input type="text" id="fbMessage" name="message" placeholder="Any feedback…"/>
+      </div>
+    </div>
+    <button type="submit" id="fbSubmit" class="submit-btn">Submit feedback</button>
+    <div id="fbMsg" style="display:none; font-size:11px; margin-top:10px; color:var(--green)">Thank you for your feedback!</div>
+  </form>
 
-                </div>
+  <button class="again-btn" onclick="resetForm()">Analyze another resume →</button>
+</div>
 
-                <!-- Summary Box -->
-                <div class="w-full"
-                    style="background: rgba(255,255,255,0.05); border-radius: 0.5rem; padding: 0.75rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary);">
-                    Fit score: <span id="summary-box-score"
-                        style="font-weight: 600; color: var(--text-primary);">0/100</span> |
-                    Role: <span id="summary-box-role"
-                        style="font-weight: 600; color: var(--text-primary);">Unknown</span> |
-                    Perspective: <span id="summary-box-perspective"
-                        style="font-weight: 600; color: var(--text-primary);">HR Recruiter</span>
-                </div>
-            </div>
+<!-- ── How it works ── -->
+<div class="how-section" id="how">
+  <div class="section-eyebrow">How it works</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-name">OCR extraction</div>
+      <div class="how-desc">Scanned PDFs and image files are processed with OCR to extract clean text before analysis.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-name">AI analysis</div>
+      <div class="how-desc">Gemini simulates real HR and technical screeners, checking against ATS constraints for your role.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-name">Privacy first</div>
+      <div class="how-desc">Everything is processed in-memory. Your resume is never saved to any server after analysis.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">04</div>
+      <div class="how-name">All roles supported</div>
+      <div class="how-desc">IT, teaching, sales, design, operations, finance — optimised for English and Hinglish resumes.</div>
+    </div>
+  </div>
+</div>
 
-            <div class="glass-card" style="margin-bottom: 2rem;">
-                <h3 class="flex items-center gap-2" style="margin-bottom: 0.5rem;">
-                    <i data-lucide="file-text" style="color: var(--primary);"></i> Executive Summary
-                </h3>
-                <p id="res-summary" class="text-secondary" style="line-height: 1.6;">
-                    Loading summary...
-                </p>
-            </div>
+<!-- ── Footer ── -->
+<footer>
+  © 2026 <a href="#">ResumeAI</a> · Free AI-Powered Resume Analyzer · Powered by Google Gemini
+</footer>
 
-            <div class="result-grid">
-                <!-- Top 3 Things to Fix First -->
-                <div class="glass-card result-card col-span-2 shadow-alert"
-                    style="border-left: 4px solid var(--danger);">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="alert-triangle" style="color: var(--danger);"></i> Top 3 Things to Fix First
-                    </h3>
-                    <ul id="top-fixes-list" class="list-disc" style="padding-left: 1.5rem;">
-                        <!-- Injected via JS -->
-                    </ul>
-                </div>
-
-                <!-- Actionable Edits -->
-                <div class="glass-card result-card col-span-2 relative">
-                    <button class="btn btn-secondary absolute top-4 right-4 text-xs"
-                        style="padding: 0.25rem 0.5rem; width: auto;" onclick="copyEdits()">
-                        <i data-lucide="copy" style="width: 14px; height: 14px; display: inline-block;"></i> Copy
-                    </button>
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem; padding-right: 4rem;">
-                        <i data-lucide="edit-3" style="color: var(--primary);"></i> Actionable Edits (Rewrite
-                        Suggestions)
-                    </h3>
-                    <div id="actionable-list" class="flex flex-col gap-2">
-                        <!-- Injected via JS -->
-                    </div>
-                </div>
-
-                <!-- Strengths -->
-                <div class="glass-card result-card">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="thumbs-up" style="color: var(--success);"></i> Key Strengths
-                    </h3>
-                    <ul id="strengths-list" class="list-disc" style="padding-left: 1.5rem;">
-                        <!-- Injected via JS -->
-                    </ul>
-                </div>
-
-                <!-- Missing Skills -->
-                <div class="glass-card result-card">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="alert-circle" style="color: var(--danger);"></i> Missing Skills
-                    </h3>
-                    <ul id="missing-skills-list" class="flex flex-col gap-3">
-                        <!-- Injected via JS -->
-                    </ul>
-                </div>
-
-                <!-- Contact Info Check -->
-                <div class="glass-card result-card">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="phone-call" style="color: #bc8cff;"></i> Missing Contact Info
-                    </h3>
-                    <ul id="contact-info-list" class="flex flex-col gap-2 list-disc" style="padding-left: 1.5rem;">
-                        <!-- Injected via JS -->
-                    </ul>
-                </div>
-
-                <!-- Section-by-Section Feedback -->
-                <div class="glass-card result-card col-span-2">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="layers" style="color: var(--primary);"></i> Section-by-Section Feedback
-                    </h3>
-                    <div id="section-feedback-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Injected via JS -->
-                    </div>
-                </div>
-
-                <!-- Grammar -->
-                <div class="glass-card result-card">
-                    <h3 class="flex items-center gap-2" style="margin-bottom: 1.5rem;">
-                        <i data-lucide="spell-check" style="color: #bc8cff;"></i> Grammar & Buzzword Detector
-                    </h3>
-                    <ul id="grammar-list" class="list-disc" style="padding-left: 1.5rem;">
-                        <!-- Injected via JS -->
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feedback Section -->
-            <div class="glass-card anim-up delay-300" style="margin-top: 3rem; padding: 2rem;">
-                <h3 style="margin-bottom: 1rem; text-align: center;">Was this helpful?</h3>
-                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">
-                    Help us improve Antigravity AI. Please rate and share your feedback!
-                </p>
-
-                <form id="feedbackForm" style="max-width: 500px; margin: 0 auto;">
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-input" required placeholder="Your name">
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label for="rating" class="form-label">Rating (1-5)</label>
-                        <select id="rating" name="rating" class="form-input" required
-                            style="cursor: pointer; appearance: auto;">
-                            <option value="" disabled selected>Select a rating</option>
-                            <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent</option>
-                            <option value="4">⭐⭐⭐⭐ 4 - Good</option>
-                            <option value="3">⭐⭐⭐ 3 - Average</option>
-                            <option value="2">⭐⭐ 2 - Poor</option>
-                            <option value="1">⭐ 1 - Terrible</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="message" class="form-label">Feedback Message</label>
-                        <textarea id="message" name="message" class="form-input" rows="4" required
-                            placeholder="What was most useful or can be improved?"></textarea>
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
-                        Submit Feedback
-                    </button>
-
-                    <div id="formMessage"
-                        style="display: none; margin-top: 15px; padding: 10px; border-radius: 4px; text-align: center; font-size: 0.85rem;">
-                    </div>
-                </form>
-            </div>
-
-            <button onclick="location.reload()" class="btn btn-secondary"
-                style="width: auto; margin: 3rem auto 0; display: block;">
-                Analyze Another Resume
-            </button>
-        </div>
-
-    </main>
-
-    <footer>
-        <div class="container" style="text-align: center;">
-            <p style="margin-bottom: 0.5rem;">&copy; 2026 ResumeAI – Free AI-Powered Resume Analyzer & ATS Score Checker</p>
-            <p style="font-size: 0.75rem; opacity: 0.7; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                ResumeAI helps students, freshers, and working professionals optimize their resumes for ATS systems.
-                Get instant AI feedback on skills matching, bullet point clarity, formatting, and more — powered by Google Gemini.
-            </p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-    <script>
-        lucide.createIcons();
-
-        // Feedback Form Submission
-        document.getElementById('feedbackForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // --> Google Apps Script Web App URL <--
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbw-3jQHGtt0rrGb-Qr3Q56KJjjWPbymfQg1sBRLAlsRm_r-7VicCyH_dKPfvirLAE-E/exec'
-            const form = document.getElementById('feedbackForm');
-            const formMessage = document.getElementById('formMessage');
-            const submitButton = document.getElementById('submitBtn');
-
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-
-            const formData = new FormData(form);
-            const searchParams = new URLSearchParams();
-            for (const pair of formData.entries()) {
-                searchParams.append(pair[0], pair[1]);
-            }
-
-            fetch(scriptURL, {
-                method: 'POST',
-                body: searchParams,
-                mode: 'no-cors'
-            })
-                .then(response => {
-                    formMessage.style.display = 'block';
-                    formMessage.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
-                    formMessage.style.color = 'var(--success, #28a745)';
-                    formMessage.style.border = '1px solid var(--success, #28a745)';
-                    formMessage.textContent = 'Thank you! Your feedback has been submitted successfully.';
-
-                    form.reset();
-
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Submit Feedback';
-
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                    }, 5000);
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    formMessage.style.display = 'block';
-                    formMessage.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
-                    formMessage.style.color = 'var(--danger, #dc3545)';
-                    formMessage.style.border = '1px solid var(--danger, #dc3545)';
-                    formMessage.textContent = 'Oops! Something went wrong while submitting. ' + error.message;
-
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Submit Feedback';
-                });
-        });
-    </script>
+</div><!-- /wrap -->
+<script src="script.js"></script>
 </body>
-
 </html>

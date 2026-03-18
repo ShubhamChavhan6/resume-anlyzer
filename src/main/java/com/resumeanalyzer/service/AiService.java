@@ -267,8 +267,8 @@ public class AiService {
 
     private String buildAnalysisPrompt(String resumeText, String jobRole, String jobDescription, String reviewerType) {
         String perspectiveInstruction = reviewerType.equalsIgnoreCase("HR Recruiter")
-                ? "Adopt the persona of a sharp HR Recruiter. Focus on clarity, formatting, soft skills, culture fit, and red flags. Value concise communication and layout."
-                : "Adopt the persona of a Senior Interviewer (Domain Expert). Focus on relevant domain skills, depth of experience, core competencies, and concrete impact. Value measurable results and accuracy.";
+                ? "Adopt the persona of a sharp HR Recruiter. Focus on clarity, soft skills, culture fit, and formatting. Value concise communication."
+                : "Adopt the persona of a Senior Interviewer (Domain Expert). Focus on relevant domain skills, depth of experience, and concrete impact. Value measurable results.";
 
         String comparisonContext = (jobDescription != null && !jobDescription.isBlank())
                 ? "Use the provided JOB DESCRIPTION TEXT to identify exact keyword matches and missing skills."
@@ -276,28 +276,28 @@ public class AiService {
 
         return """
                 ### ROLE
-                You are an Automated Resume Screening System.
-                %s
-                Your task is to review this resume for the role of: "%s".
+                You are an ATS and recruiter specifically for the role: "%s" reviewing this resume.
+                Perspective: %s.
+                Only evaluate and suggest improvements relevant to "%s".
+                Do NOT assume Java/Cloud/IT unless they are actually present in the resume AND highly relevant to "%s".
 
                 ### TASK
-                1. Analyze the RESUME TEXT against the JOB ROLE.
+                1. Analyze the RESUME TEXT strictly against the target JOB ROLE.
                 2. %s
-                3. Identify specific strengths and critical missing skills (Must-Have vs Nice-to-Have).
-                4. Provide concrete, actionable rewrite suggestions, including a "Before -> After" format for weak bullets, showing quantified impact. Where appropriate, use examples relevant to the Indian market (e.g. "Java Developer at TCS", "Sales Executive in FMCG - Mumbai").
-                5. Add a "buzzword / fluff detector" that flags vague phrases (like "hard-working, passionate") in grammarIssues and suggests stronger alternatives.
-                6. Explicitly call out missing resume sections (e.g., Summary, Projects, Skills, Certifications) and tell the user why they matter for this role.
-                7. Check for basic Contact Information (Name, Email, Phone/Mobile, Location, LinkedIn/Portfolio). If the Target Role is technical (e.g., developer, engineer, data), explicitly look for a GitHub profile link (github.com/username) or portfolio.
-                8. Provide a quantitative fit score (0-100) and sub-scores.
+                3. Identify specific strengths and critical missing skills (Must-Have vs Nice-to-Have) for this exact role.
+                4. Provide concrete, actionable rewrite suggestions, including a "Before -> After" format for weak bullets, showing quantified impact relevant to the role. Use industry-appropriate examples based on the target role (e.g. for a Teacher, use education metrics; for Sales, use revenue metrics).
+                5. Add a "buzzword / fluff detector" that flags vague phrases (like "hard-working, passionate") and suggests stronger alternatives.
+                6. Check for basic Contact Information (Name, Email, Phone, Location, LinkedIn). If the Target Role is technical (e.g., developer, engineer), explicitly look for a GitHub/Portfolio link.
+                7. Provide a quantitative fit score (0-100) and sub-scores.
 
-                ### STRICT CONSTRAINTS
-                - **Role Family Detection**: From the resume and target job role, infer one broad family (Tech, Business, Education, Design/Creative, Support/Service, Other) and tailor strengths, missing skills, and advice to that family. Never suggest skills from another family.
-                - **Tone & Format**: Use neutral, recruiter-style language. Standardize bullets to read like real HR feedback with full sentences. Include 1-2 India-focused examples (like "Java Developer at TCS" or "Sales Executive in FMCG (Mumbai)") if relevant.
-                - **Top Fixes**: After the Executive Summary, output exactly three short bullets titled 'Top 3 things to fix first' that a student or jobseeker can do in the next 7 days. Each bullet should be very short and actionable (e.g., 'Add at least one internship or project related to [role].').
-                - **Strengths**: Always provide exactly 3 bullets, each 1 line.
-                - **Actionable Edits**: Start with ONE improved professional summary tailored to the role. Then suggest 3-5 entirely new or heavily improved bullets tailored to the JD. Provide "Before: ... -> After: ..." examples showing quantified impact.
-                - **Missing Skills Format**: Group missing or weak keywords from the JD as 'Must-have' or 'Nice-to-have'. Prefix with '[Must-have]' or '[Nice-to-have]'. Mention explicitly WHERE the user should add them (e.g., Summary, Experience, Skills section). Max 3-5 items.
-                - **Strategic Advice Format**: Explicitly mention missing sections (Summary, Projects, Skills, Certifications) and explain why they matter. Add explicit time frames (e.g., "In the next 1-3 months, do X", "In 6-12 months, complete Y", "In 1-2 years, build Z"). Keep them short and actionable.
+                ### STRICT CONSTRAINTS & IT BIAS GUARD
+                - **Role Consistency Guard**: If the resume content reflects a completely different industry (e.g., mostly IT/Java) but the target role is non-IT (e.g., Primary Teacher, Sales Executive), DO NOT twist the feedback to pretend they are applying for an IT role. Instead, explicitly warn the user that their current resume is severely misaligned for the target role ("%s"). Refuse to act like they are applying for a Java developer if they selected Primary Teacher.
+                - **Tone & Format**: Use neutral, recruiter-style language. Standardize bullets to read like real HR feedback.
+                - **Top Fixes**: Provide exactly three short, highly actionable bullets ('Top 3 things to fix first') a jobseeker can do in the next 7 days.
+                - **Strengths**: Exactly 3 distinct bullets, 1 short line each.
+                - **Missing Skills**: Group missing or weak keywords as '[Must-have]' or '[Nice-to-have]'. Max 3-5 keywords relevant to "%s".
+                - **Actionable Edits**: Start with ONE improved professional summary tailored to "%s". Suggest 3-5 "Before: ... -> After: ..." rewrites for bullet points.
+                - **JSON Strictness**: DO NOT output any markdown tags like ```json. ONLY output the raw JSON object.
 
                 --------------------------------------------------------
                 ::: JSON OUTPUT REQUIREMENT :::
@@ -309,38 +309,39 @@ public class AiService {
                   "experienceScore": (Integer 0-100),
                   "formattingScore": (Integer 0-100),
                   "clarityScore": (Integer 0-100),
-                  "summary": "Professional summary (max 3 sentences). Always mention the target role family: 'Overall fit for entry-level teacher roles...' / 'for sales roles...' / 'for backend developer roles...'.",
-                  "topFixes": ["Top 3 things to fix first as short actionable bullets"],
-                  "strengths": ["List of exactly 3 distinct key strengths, each 1 short line. If a GitHub profile is found for a technical role, include 'GitHub profile detected – good for demonstrating real projects.' as one of the strengths."],
-                  "missingSkills": ["List 3-5 keywords/skills missing. Pattern: '[Must-have] Keyword - Add to [Skills/Experience section]. Reason: ...'"],
-                  "missingContactInfo": ["List of missing or hard-to-find contact elements like 'Mobile Number', 'Email'. If LinkedIn is missing, add: 'Add a LinkedIn profile link for professional networking.' If GitHub is not found and the target job is technical, add: 'Add a GitHub profile link showcasing your projects; it increases trust for technical roles.' Return an empty list if no issues."],
-                  "actionableEdits": ["Suggest 3-5 new/rewritten bullets. Format: 'Before: [fluffy bullet] -> After: [quantified bullet]'. If none, suggest completely new bullets."],
+                  "summary": "Professional summary (max 3 sentences). Always describe fit for the specific target role.",
+                  "topFixes": ["Top actionable bullet 1", "Top actionable bullet 2", "Top actionable bullet 3"],
+                  "strengths": ["Strength 1", "Strength 2", "Strength 3"],
+                  "missingSkills": ["[Must-have] Keyword 1", "[Nice-to-have] Keyword 2"],
+                  "missingContactInfo": ["Missing item 1", "Missing item 2"],
+                  "actionableEdits": ["Before: [weak] -> After: [quantified for role]"],
                   "sectionFeedback": [
                       {
                         "sectionName": "Summary",
-                        "good": ["2-3 bullets on what's good"],
-                        "improvements": ["2-3 bullets on what to improve"]
-                      },
-                      {
-                        "sectionName": "Experience",
-                        "good": ["2-3 bullets on what's good"],
-                        "improvements": ["2-3 bullets on what to improve"]
+                        "good": ["what's good"],
+                        "improvements": ["what to improve"]
                       }
                   ],
-                  "grammarIssues": ["Flag vague buzzwords/fluff like 'passionate, hard-working' and suggest replacements. Also list grammar/spelling errors. Or 'None'"]
+                  "grammarIssues": ["grammar/fluff issues or 'None'"]
                 }
 
                 ### INPUT DATA
-                JOB ROLE: %s
+                TARGET JOB ROLE: %s
                 JOB DESCRIPTION (Priority):
                 %s
 
                 RESUME TEXT:
                 %s
                 """
-                .formatted(perspectiveInstruction, jobRole, comparisonContext, jobRole,
+                .formatted(
+                        jobRole, perspectiveInstruction, jobRole, jobRole,
+                        comparisonContext,
+                        jobRole,
+                        jobRole, jobRole,
+                        jobRole,
                         (jobDescription != null && !jobDescription.isBlank() ? jobDescription : "Not Provided"),
-                        resumeText);
+                        resumeText
+                );
     }
 
     private void sanitizeListField(JsonNode root, String fieldName) {
