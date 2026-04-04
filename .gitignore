@@ -1,2 +1,17 @@
 ARCHITECTURE.md
 src/main/resources/application.properties
+
+# Build output
+target/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Tool-generated folders
+.kilo/
+
+# Logs
+*.log
+last_ai_error.txt

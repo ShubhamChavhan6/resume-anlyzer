@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resume Analysis Report – ResumeAI</title>
+<meta name="description" content="Your AI-powered resume analysis report. ATS score, skill gaps, actionable edits and section-by-section feedback."/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="report.css"/>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<div class="report-wrap">
+
+  <!-- ── Navbar ── -->
+  <nav class="report-nav">
+    <a class="logo" href="index.html">
+      <div class="logo-mark">R</div>
+      <span class="logo-text">ResumeAI</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-btn" id="download-btn" onclick="downloadReport()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <a class="nav-btn nav-btn-outline" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        New Analysis
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Report Header ── -->
+  <header class="report-header" id="report-header">
+    <div class="header-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Analysis complete
+    </div>
+    <h1 class="report-title">Resume Analysis Report</h1>
+    <div class="report-meta" id="report-meta">
+      <div class="meta-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        <span id="meta-role">Target Role</span>
+      </div>
+      <div class="meta-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span id="meta-reviewer">Reviewer</span>
+      </div>
+      <div class="meta-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="meta-time"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Score Dashboard ── -->
+  <section class="score-dashboard" id="score-dashboard">
+    <div class="score-main-card">
+      <div class="score-ring-container">
+        <svg viewBox="0 0 120 120" class="score-svg">
+          <defs>
+            <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6"/>
+              <stop offset="100%" stop-color="#22c55e"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="url(#scoreGrad)" stroke-width="8"
+                  stroke-dasharray="314" stroke-dashoffset="314"
+                  stroke-linecap="round" transform="rotate(-90 60 60)" id="score-ring" filter="url(#glow)"/>
+          <text x="60" y="55" text-anchor="middle" class="score-number" id="score-num">0</text>
+          <text x="60" y="72" text-anchor="middle" class="score-suffix">/100</text>
+        </svg>
+        <div class="score-verdict" id="score-verdict">Analyzing...</div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="breakdown-item">
+          <div class="breakdown-header">
+            <span class="breakdown-label">Skills Match</span>
+            <span class="breakdown-value" id="val-skills">0</span>
+          </div>
+          <div class="breakdown-bar"><div class="breakdown-fill fill-blue" id="bar-skills"></div></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-header">
+            <span class="breakdown-label">Experience Relevance</span>
+            <span class="breakdown-value" id="val-exp">0</span>
+          </div>
+          <div class="breakdown-bar"><div class="breakdown-fill fill-purple" id="bar-exp"></div></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-header">
+            <span class="breakdown-label">ATS Formatting</span>
+            <span class="breakdown-value" id="val-fmt">0</span>
+          </div>
+          <div class="breakdown-bar"><div class="breakdown-fill fill-green" id="bar-fmt"></div></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-header">
+            <span class="breakdown-label">Clarity & Impact</span>
+            <span class="breakdown-value" id="val-clarity">0</span>
+          </div>
+          <div class="breakdown-bar"><div class="breakdown-fill fill-amber" id="bar-clarity"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Content Grid ── -->
+  <div class="report-grid">
+
+    <!-- Left column -->
+    <div class="report-col">
+
+      <!-- Executive Summary -->
+      <section class="report-card card-summary">
+        <div class="card-accent accent-blue"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h2>Executive Summary</h2>
+        </div>
+        <p class="summary-text" id="exec-summary">Loading analysis...</p>
+      </section>
+
+      <!-- Top 3 Fixes -->
+      <section class="report-card card-fixes">
+        <div class="card-accent accent-red"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-red">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h2>Top 3 Things to Fix</h2>
+          <button class="copy-btn" onclick="copySection('fixes-content')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div id="fixes-content" class="fixes-list"></div>
+      </section>
+
+      <!-- Actionable Edits -->
+      <section class="report-card card-edits">
+        <div class="card-accent accent-purple"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h2>Actionable Edits</h2>
+          <button class="copy-btn" onclick="copySection('edits-content')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div id="edits-content" class="edits-list"></div>
+      </section>
+
+      <!-- Section Feedback -->
+      <section class="report-card card-sections">
+        <div class="card-accent accent-teal"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-teal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <h2>Section-by-Section Feedback</h2>
+        </div>
+        <div id="section-feedback" class="sections-list"></div>
+      </section>
+    </div>
+
+    <!-- Right column -->
+    <div class="report-col">
+
+      <!-- Key Strengths -->
+      <section class="report-card card-strengths">
+        <div class="card-accent accent-green"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-green">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h2>Key Strengths</h2>
+        </div>
+        <div id="strengths-list" class="strengths-list"></div>
+      </section>
+
+      <!-- Missing Skills -->
+      <section class="report-card card-missing">
+        <div class="card-accent accent-amber"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-amber">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h2>Missing Skills</h2>
+        </div>
+        <div id="missing-list" class="tags-container"></div>
+      </section>
+
+      <!-- Grammar & Buzzwords -->
+      <section class="report-card card-grammar">
+        <div class="card-accent accent-slate"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-slate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          </div>
+          <h2>Grammar & Buzzwords</h2>
+        </div>
+        <div id="grammar-content" class="grammar-content"></div>
+      </section>
+
+      <!-- Missing Contact -->
+      <section class="report-card card-contact">
+        <div class="card-accent accent-indigo"></div>
+        <div class="card-heading">
+          <div class="card-icon-wrap icon-indigo">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h2>Missing Contact Info</h2>
+        </div>
+        <div id="contact-list" class="tags-container"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ── Feedback Widget ── -->
+  <section class="report-card card-feedback">
+    <div class="feedback-inner">
+      <div class="feedback-left">
+        <h2 class="feedback-heading">Was this helpful?</h2>
+        <p class="feedback-sub">Help us improve ResumeAI — takes 10 seconds.</p>
+        <div class="stars-row" id="stars">
+          <span class="star" onclick="rate(1)">★</span>
+          <span class="star" onclick="rate(2)">★</span>
+          <span class="star" onclick="rate(3)">★</span>
+          <span class="star" onclick="rate(4)">★</span>
+          <span class="star" onclick="rate(5)">★</span>
+          <input type="hidden" id="ratingInput" name="rating" value="0"/>
+        </div>
+      </div>
+      <div class="feedback-right">
+        <div class="fb-field">
+          <label class="fb-label">Name (optional)</label>
+          <input type="text" id="fbName" placeholder="Your name"/>
+        </div>
+        <div class="fb-field">
+          <label class="fb-label">Message (optional)</label>
+          <input type="text" id="fbMessage" placeholder="Any feedback…"/>
+        </div>
+        <button class="fb-submit" id="fbSubmit" onclick="submitFeedback()">Submit feedback</button>
+        <div id="fbMsg" class="fb-msg"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ── -->
+  <div class="bottom-cta">
+    <a href="index.html" class="cta-again">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+      Analyze another resume
+    </a>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="report-footer">
+    <div class="footer-inner">
+      <span>© 2026 <a href="index.html">ResumeAI</a></span>
+      <span class="footer-sep">·</span>
+      <span>Free AI-Powered Resume Analyzer</span>
+      <span class="footer-sep">·</span>
+      <span>Powered by Google Gemini</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="report.js"></script>
+</body>
+</html>

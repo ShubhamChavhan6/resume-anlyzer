@@ -13,6 +13,6 @@ spring.application.name=ResumeAnalyzer
 spring.web.resources.static-locations=file:src/main/resources/static/,classpath:/static/
 
 # AI Configuration
-# Set your Gemini API key here (get one at https://aistudio.google.com/app/apikey)
-# DO NOT commit this file with a real key — it is listed in .gitignore
+# Copy this file to application.properties and set your real key below.
+# Get a free Gemini API key at: https://aistudio.google.com/app/apikey
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE

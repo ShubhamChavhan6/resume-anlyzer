@@ -169,7 +169,10 @@ async function executeAnalysis(isDemo) {
           sectionFeedback: [{sectionName: "Experience", good: ["Consistent career progression", "Clear technical stack mentioned"], improvements: ["Lacks quantifiable metrics", "Needs to highlight leadership more"]}, {sectionName: "Projects", good: ["Relevant enterprise projects"], improvements: ["Missing links to source code or live deployment"]}],
           grammarIssues: ["None detected"]
       };
-      setTimeout(() => renderResults(demoData, reviewerStr, role), 1500);
+      setTimeout(() => {
+          sessionStorage.setItem('resumeReport', JSON.stringify({ data: demoData, reviewer: reviewerStr, role: role }));
+          window.location.href = 'report.html';
+      }, 1500);
       return;
   }
 
@@ -189,7 +192,8 @@ async function executeAnalysis(isDemo) {
           throw new Error(err.error || 'Analysis failed');
       }
       const data = await response.json();
-      renderResults(data, reviewerStr, role);
+      sessionStorage.setItem('resumeReport', JSON.stringify({ data: data, reviewer: reviewerStr, role: role }));
+      window.location.href = 'report.html';
   } catch (error) {
       clearInterval(loadingInterval);
       console.error("Analysis Error:", error);
@@ -242,48 +246,68 @@ function renderResults(data, reviewer, role) {
   // Executive Summary
   document.getElementById('exec-summary').textContent = data.summary || "No summary available.";
 
-  // Top Fixes
+  // Top Fixes - Enhanced with special class
+  const fixesContainer = document.getElementById('fixes-content').parentElement;
+  fixesContainer.classList.add('special-fix');
   const fixesHtml = data.topFixes && data.topFixes.length > 0 
       ? data.topFixes.map((f, i) => `<div class="fix-item"><div class="fix-num">${i+1}</div><div class="fix-text">${f}</div></div>`).join('')
       : "<div class='rs-content' style='color:var(--muted)'>No top fixes suggested.</div>";
   document.getElementById('fixes-content').innerHTML = fixesHtml;
 
-  // Strengths
+  // Strengths - Enhanced with special class
+  const strengthsContainer = document.getElementById('strengths-list').parentElement;
+  strengthsContainer.classList.add('special-strength');
   const strengthsHtml = data.strengths && data.strengths.length > 0
       ? data.strengths.map(s => `<span class="tag tag-green">${s}</span>`).join('')
       : "<span class='rs-content' style='color:var(--muted)'>No specific strengths listed.</span>";
   document.getElementById('strengths-list').innerHTML = strengthsHtml;
 
-  // Missing Skills
+  // Missing Skills - Enhanced with special class
+  const missingContainer = document.getElementById('missing-list').parentElement;
+  missingContainer.classList.add('special-missing');
   const missingHtml = data.missingSkills && data.missingSkills.length > 0
       ? data.missingSkills.map(s => {
           let tClass = "tag-red";
           let sText = s;
-          if(s.toLowerCase().includes("nice-to-have")) { tClass = "tag-green"; sText = s.replace(/\[Nice[-\s]to[-\s]Have\]/i, "").trim(); }
+          if(s.toLowerCase().includes("nice-to-have")) { tClass = "tag-amber"; sText = s.replace(/\[Nice[-\s]to[-\s]Have\]/i, "").trim(); }
           else if(s.toLowerCase().includes("must-have")) { sText = s.replace(/\[Must[-\s]?Have\]/i, "").trim(); }
           return `<span class="tag ${tClass}">${sText}</span>`;
       }).join('')
       : "<span class='rs-content' style='color:var(--green)'>No major skills missing!</span>";
   document.getElementById('missing-list').innerHTML = missingHtml;
 
-  // Actionable Edits
+  // Actionable Edits - Enhanced with before/after format
   const editsHtml = data.actionableEdits && data.actionableEdits.length > 0
-      ? data.actionableEdits.map(e => `<div style="margin-bottom:8px; display:flex; gap:8px;"> <span style="color:var(--blue)">→</span> <span>${e}</span> </div>`).join('')
+      ? data.actionableEdits.map(e => {
+          const parts = e.split(/->|→/);
+          if (parts.length >= 2) {
+              return `<div class="action-edit">
+                  <strong>Rewrite Suggestion</strong>
+                  <div class="before-after">
+                      <div class="before">Before: ${parts[0].replace(/^Before:\s*/i, '').trim()}</div>
+                      <div class="after">After: ${parts.slice(1).join('→').replace(/^After:\s*/i, '').trim()}</div>
+                  </div>
+              </div>`;
+          }
+          return `<div class="action-edit"><div class="rs-content">${e}</div></div>`;
+      }).join('')
       : "<div class='rs-content' style='color:var(--muted)'>No specific rewrites suggested.</div>";
   document.getElementById('edits-content').innerHTML = editsHtml;
 
-  // Section Feedback
+  // Section Feedback - Enhanced
   const sectionsHtml = data.sectionFeedback && data.sectionFeedback.length > 0
       ? data.sectionFeedback.map(sf => `
-          <div style="margin-bottom:16px;">
-              <strong style="color:var(--text); font-size:14px;">${sf.sectionName}</strong>
-              <div style="margin-top:6px; font-size:12px;">
-                  <span style="color:var(--green); font-weight:600; text-transform:uppercase; font-size:10px; display:block; margin-bottom:4px;">What's Good</span>
-                  <ul style="padding-left:16px; margin-bottom:10px; color:var(--muted)">${(sf.good || []).map(g=>`<li>${g}</li>`).join('') || "<li>N/A</li>"}</ul>
-                  
-                  <span style="color:var(--red); font-weight:600; text-transform:uppercase; font-size:10px; display:block; margin-bottom:4px;">Improvements</span>
-                  <ul style="padding-left:16px; color:var(--muted)">${(sf.improvements || []).map(g=>`<li>${g}</li>`).join('') || "<li>N/A</li>"}</ul>
+          <div class="section-item">
+              <div class="section-header">
+                  <span class="section-name">${sf.sectionName}</span>
+                  <span class="good-tag">Good</span>
               </div>
+              <ul>${(sf.good || []).map(g=>`<li>${g}</li>`).join('') || "<li>No specific strengths noted</li>"}</ul>
+              <div class="section-header" style="margin-top:12px;">
+                  <span class="section-name">Improvements</span>
+                  <span class="improve-tag">Fix</span>
+              </div>
+              <ul>${(sf.improvements || []).map(g=>`<li>${g}</li>`).join('') || "<li>No specific improvements noted</li>"}</ul>
           </div>
       `).join('')
       : "<div class='rs-content' style='color:var(--muted)'>No detailed section feedback generated.</div>";
@@ -291,14 +315,16 @@ function renderResults(data, reviewer, role) {
 
   // Grammar & Buzzwords
   const grammarHtml = data.grammarIssues && data.grammarIssues.length > 0
-      ? `<ul style="padding-left:16px; color:var(--muted); font-size:13px;">${data.grammarIssues.map(gi => `<li>${gi}</li>`).join('')}</ul>`
-      : "<div class='rs-content' style='color:var(--green)'>No grammar issues detected.</div>";
+      ? `<div class="rs-content" style="padding:12px; background:var(--bg); border-radius:var(--r-md); border-left:3px solid var(--amber);">
+          <ul style="padding-left:16px; color:var(--muted); font-size:13px; margin:0;">${data.grammarIssues.map(gi => `<li>${gi}</li>`).join('')}</ul>
+         </div>`
+      : "<div class='rs-content' style='color:var(--green)'>✓ No grammar issues or buzzwords detected.</div>";
   document.getElementById('grammar-content').innerHTML = grammarHtml;
 
   // Missing Contact
   const contactHtml = data.missingContactInfo && data.missingContactInfo.length > 0
       ? data.missingContactInfo.map(c => `<span class="tag tag-blue">${c}</span>`).join('')
-      : "<span class='rs-content' style='color:var(--green)'>All essential contact info is present!</span>";
+      : "<span class='rs-content' style='color:var(--green)'>✓ All essential contact info is present!</span>";
   document.getElementById('contact-list').innerHTML = contactHtml;
 }
 
